@@ -16,6 +16,7 @@ int main(int argc, char** argv)
     if (lectura && std::string(ruta.substr(ruta.length()-15, 15)) == "estudiantes.csv")
     {
         std::vector<estudiante> notas = obtenerNotas(lectura);
+        lectura.close;
 
     } else {
         
