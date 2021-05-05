@@ -4,10 +4,11 @@
 
 #include "dependencias/funciones.h"
 
-
+int n=0;
 
 int main(int argc, char** argv)
 {
+
     std::string ruta = argv[1];
 
     std::ifstream lectura;
@@ -16,7 +17,15 @@ int main(int argc, char** argv)
     if (lectura && std::string(ruta.substr(ruta.length()-15, 15)) == "estudiantes.csv")
     {
         std::vector<estudiante> notas = obtenerNotas(lectura);
-        lectura.close;
+        
+        for (std::vector<estudiante>::iterator it = notas.begin(); it != notas.end(); it++, n++)
+    {
+
+        std::cout<<notas.at(n).prom_len<<std::endl;
+
+    }
+    
+        lectura.close();
 
     } else {
         
