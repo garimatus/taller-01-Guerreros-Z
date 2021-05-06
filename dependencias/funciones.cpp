@@ -87,6 +87,7 @@ std::vector<estudiante> obtenerNotas(std::istream& lectura)
             temp.prom_art_edf=((temp.prom_art+temp.prom_edf)/2);
 
             temp.prom_len_his=((temp.prom_len+temp.prom_his)/2);
+            temp.prom_tec_mat_sci=((temp.prom_tec+temp.prom_mat+temp.prom_sci)/3);
 
             ++columna;
         }

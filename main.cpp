@@ -21,7 +21,7 @@ int main(int argc, char** argv)
         for (std::vector<estudiante>::iterator it = notas.begin(); it != notas.end(); it++, n++)
     {
 
-        std::cout<<notas.at(n).prom_len_his<<std::endl;
+        std::cout<<notas.at(n).prom_tec_mat_sci<<std::endl;
 
     }
     

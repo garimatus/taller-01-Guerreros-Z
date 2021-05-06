@@ -12,4 +12,5 @@ struct estudiante {
     double prom_gen;
     double prom_art_edf;
     double prom_len_his;
+    double prom_tec_mat_sci;
 };
