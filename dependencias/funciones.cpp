@@ -82,6 +82,12 @@ std::vector<estudiante> obtenerNotas(std::istream& lectura)
                 item=item.substr(1,item.length()-1);
                 temp.prom_edf = atof(item.c_str());
             }
+
+            temp.prom_gen=((temp.prom_len+temp.prom_ing+temp.prom_mat+temp.prom_sci+temp.prom_his+temp.prom_tec+temp.prom_art+temp.prom_edf)/8);
+            temp.prom_art_edf=((temp.prom_art+temp.prom_edf)/2);
+
+            temp.prom_len_his=((temp.prom_len+temp.prom_his)/2);
+
             ++columna;
         }
         //std::cout<<temp.id_generico<<std::endl;
