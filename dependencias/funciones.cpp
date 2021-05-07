@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <string>
 #include <cstring>
 #include <sstream>
 #include <algorithm>
@@ -9,6 +10,22 @@
 
 
 
+
+struct {
+    bool operator()(estudiante& a, estudiante& b) { return a.prom_gen > b.prom_gen; };
+}maximos;
+
+struct {
+    bool operator()(estudiante& a, estudiante& b) { return a.prom_art_edf > b.prom_art_edf; };
+}artistico;
+
+struct {
+    bool operator()(estudiante& a, estudiante& b) { return a.prom_len_his > b.prom_len_his; };
+}humanismo;
+
+struct {
+    bool operator()(estudiante& a, estudiante& b) { return a.prom_tec_mat_sci > b.prom_tec_mat_sci; };
+}tecnicos;
 
 std::vector<estudiante> obtenerNotas(std::istream& lectura)
 {
@@ -76,16 +93,121 @@ std::vector<estudiante> obtenerNotas(std::istream& lectura)
                 temp.prom_edf = atof(item.c_str());
             }
 
-            temp.prom_gen = double((temp.prom_len+temp.prom_ing+temp.prom_mat+temp.prom_sci+temp.prom_his+temp.prom_tec+temp.prom_art+temp.prom_edf)/8.0);
-            temp.prom_art_edf = double((temp.prom_art+temp.prom_edf)/2.0);
-            temp.prom_len_his = double((temp.prom_len+temp.prom_his)/2.0);
-            temp.prom_tec_mat_sci = double((temp.prom_tec+temp.prom_mat+temp.prom_sci)/3);
-
             ++columna;
         }
+
+        temp.prom_gen = double((temp.prom_len+temp.prom_ing+temp.prom_mat+temp.prom_sci+temp.prom_his+temp.prom_tec+temp.prom_art+temp.prom_edf)/8.0);
+        temp.prom_art_edf = double((temp.prom_art+temp.prom_edf)/2.0);
+        temp.prom_len_his = double((temp.prom_len+temp.prom_his)/2.0);
+        temp.prom_tec_mat_sci = double((temp.prom_tec+temp.prom_mat+temp.prom_sci)/3.0);
 
         notas.push_back(temp);
     }
     
     return notas;
+}
+
+std::vector<estudiante> sort(std::vector<estudiante> notas, std::string criterio, int n)
+{
+    std::vector<estudiante> seleccionados;
+
+    if (criterio == "maximos")
+    {
+        std::sort(notas.begin(), notas.end(), maximos);
+
+        for(int i = 0; i < n; ++i)
+        {
+            estudiante aux = notas.front();
+            notas.erase(notas.begin());
+            aux.aptitud = new char[criterio.length()+1];
+            std::strcpy(aux.aptitud, criterio.c_str());
+            seleccionados.push_back(aux);
+        }
+            
+    }
+
+    if (criterio == "artistico")
+    {
+        std::sort(notas.begin(), notas.end(), artistico);
+
+        for(int i = 0; i < n; ++i)
+        {
+            estudiante aux = notas.front();
+            notas.erase(notas.begin());
+            aux.aptitud = new char[criterio.length()+1];
+            std::strcpy(aux.aptitud, criterio.c_str());
+            seleccionados.push_back(aux);
+        }
+    }
+
+    if (criterio == "humanismo")
+    {
+        std::sort(notas.begin(), notas.end(), humanismo);
+
+        for(int i = 0; i < n; ++i)
+        {
+            estudiante aux = notas.front();
+            notas.erase(notas.begin());
+            aux.aptitud = new char[criterio.length()+1];
+            std::strcpy(aux.aptitud, criterio.c_str());
+            seleccionados.push_back(aux);
+        }
+    }
+
+    if (criterio == "tecnicos")
+    {
+        std::sort(notas.begin(), notas.end(), tecnicos);
+
+        for(int i = 0; i < n; ++i)
+        {
+            estudiante aux = notas.front();
+            notas.erase(notas.begin());
+            aux.aptitud = new char[criterio.length()+1];
+            std::strcpy(aux.aptitud, criterio.c_str());
+            seleccionados.push_back(aux);
+        }
+    }
+    
+    return seleccionados;
+}
+
+void escribir(std::vector<estudiante> seleccionados)
+{
+    std::ofstream salida;
+
+    std::string aptitud = seleccionados.begin() -> aptitud;
+    
+    salida.open("./"+std::string(aptitud)+".csv");
+    
+    salida << "id;nombre;promedio" << std::endl;
+
+    if (aptitud == "maximos")
+    {
+        for(std::vector<estudiante>::iterator it = seleccionados.begin(); it !=  seleccionados.end(); ++it )
+            salida << std::to_string(it -> id_numerico)+';'+std::string(it -> id_generico)+';'+std::to_string(it -> prom_gen) << std::endl;
+    }
+
+    if (aptitud == "artistico")
+    {
+        for(std::vector<estudiante>::iterator it = seleccionados.begin(); it !=  seleccionados.end(); ++it )
+            salida << std::to_string(it -> id_numerico)+';'+std::string(it -> id_generico)+';'+std::to_string(it -> prom_art_edf) << std::endl;
+    }
+
+    if (aptitud == "humanismo")
+    {
+        for(std::vector<estudiante>::iterator it = seleccionados.begin(); it !=  seleccionados.end(); ++it )
+            salida << std::to_string(it -> id_numerico)+';'+std::string(it -> id_generico)+';'+std::to_string(it -> prom_len_his) << std::endl;
+    }
+
+    if (aptitud == "tecnicos")
+    {
+        for(std::vector<estudiante>::iterator it = seleccionados.begin(); it !=  seleccionados.end(); ++it )
+            salida << std::to_string(it -> id_numerico)+";"+std::string(it -> id_generico)+';'+std::to_string(it -> prom_tec_mat_sci) << std::endl;
+    }
+    
+}
+
+void integrantes()
+{
+    std::cout << "=== Integrantes ===" << std::endl;
 }

@@ -17,4 +17,4 @@ funciones.o: dependencias/funciones.cpp dependencias/funciones.h
 	g++ -c dependencias/funciones.cpp -o build/funciones.o
 
 clean:
-	rm -fr build/*.o bin/* build bin
+	rm -fr build/*.o bin/* build bin maximos.csv artistico.csv humanismo.csv tecnicos.csv 
