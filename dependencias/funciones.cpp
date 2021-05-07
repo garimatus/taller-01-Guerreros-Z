@@ -209,5 +209,5 @@ void escribir(std::vector<estudiante> seleccionados)
 
 void integrantes()
 {
-    std::cout << "=== Integrantes ===" << std::endl;
+    std::cout << "----------------------\n  ===Integrantes===\n    -Edgar Matus\n    -Alex Bidart\n    -Nicolas Jimenez\n----------------------" << std::endl;
 }
