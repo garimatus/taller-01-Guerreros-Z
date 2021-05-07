@@ -1,6 +1,6 @@
 struct estudiante {
     int id_numerico;
-    std::string id_generico;
+    char* id_generico;
     double prom_len;
     double prom_ing;
     double prom_mat;

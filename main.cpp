@@ -18,13 +18,6 @@ int main(int argc, char** argv)
     {
         std::vector<estudiante> notas = obtenerNotas(lectura);
         
-        for (std::vector<estudiante>::iterator it = notas.begin(); it != notas.end(); it++, n++)
-    {
-
-        std::cout<<notas.at(n).prom_tec_mat_sci<<std::endl;
-
-    }
-    
         lectura.close();
 
     } else {
