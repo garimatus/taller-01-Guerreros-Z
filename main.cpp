@@ -5,7 +5,11 @@
 #include "dependencias/funciones.h"
 
 
-
+/*
+*@param argc Cantidad de argumentos.
+*@argv Matriz de argumentos.
+*@return Código de salida.
+*/
 int main(int argc, char** argv)
 {
     std::string ruta = argv[1];
@@ -16,8 +20,14 @@ int main(int argc, char** argv)
 
     if (lectura && std::string(ruta.substr(ruta.length()-15, 15)) == "estudiantes.csv")
     {
+        /* 
+        * Se obtiene el vector.
+        */
         std::vector<estudiante> notas = obtenerNotas(lectura);
 
+        /*
+        * Se escriben los vectores de los seleccionados según el criterio del segundo parámetro.
+        */
         escribir(sort(notas, "maximos", 100));
 
         escribir(sort(notas, "artistico", 100));

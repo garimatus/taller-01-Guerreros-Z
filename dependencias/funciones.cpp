@@ -10,7 +10,9 @@
 
 
 
-
+/*
+* Operadores de criterio.
+*/
 struct {
     bool operator()(estudiante& a, estudiante& b) { return a.prom_gen > b.prom_gen; };
 }maximos;
@@ -27,6 +29,10 @@ struct {
     bool operator()(estudiante& a, estudiante& b) { return a.prom_tec_mat_sci > b.prom_tec_mat_sci; };
 }tecnicos;
 
+/* 
+*@param lectura El stream de texto desde la memoria de la función main.
+*@return notas El vector de todas las notas del archivo.
+*/
 std::vector<estudiante> obtenerNotas(std::istream& lectura)
 {
     std::string linea;
@@ -96,6 +102,9 @@ std::vector<estudiante> obtenerNotas(std::istream& lectura)
             ++columna;
         }
 
+        /*
+        * Cálculo del promedio.
+        */
         temp.prom_gen = double((temp.prom_len+temp.prom_ing+temp.prom_mat+temp.prom_sci+temp.prom_his+temp.prom_tec+temp.prom_art+temp.prom_edf)/8.0);
         temp.prom_art_edf = double((temp.prom_art+temp.prom_edf)/2.0);
         temp.prom_len_his = double((temp.prom_len+temp.prom_his)/2.0);
@@ -107,6 +116,12 @@ std::vector<estudiante> obtenerNotas(std::istream& lectura)
     return notas;
 }
 
+/* 
+* @param notas Vector con las notas relativas de los aún no seleccionados.
+* @param Criterio El criterio a elegirse desde main.
+* @param n Cantidad de estudiantes a seleccionar.
+* @return seleccionados El vector de los selccionados.
+*/
 std::vector<estudiante> sort(std::vector<estudiante> notas, std::string criterio, int n)
 {
     std::vector<estudiante> seleccionados;
@@ -123,7 +138,6 @@ std::vector<estudiante> sort(std::vector<estudiante> notas, std::string criterio
             std::strcpy(aux.aptitud, criterio.c_str());
             seleccionados.push_back(aux);
         }
-            
     }
 
     if (criterio == "artistico")
@@ -171,6 +185,10 @@ std::vector<estudiante> sort(std::vector<estudiante> notas, std::string criterio
     return seleccionados;
 }
 
+/*
+@param seleccionados Vector con los seleccionados a escribirse.
+@return Ninguno.
+*/
 void escribir(std::vector<estudiante> seleccionados)
 {
     std::ofstream salida;
@@ -207,6 +225,10 @@ void escribir(std::vector<estudiante> seleccionados)
     
 }
 
+/*
+*@param Ninguno.
+*@return Ninguno.
+*/
 void integrantes()
 {
     std::cout << "----------------------\n  ===Integrantes===\n    -Edgar Matus\n    -Alex Bidart\n    -Nicolas Jimenez\n----------------------" << std::endl;
